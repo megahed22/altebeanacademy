@@ -6,6 +6,7 @@ body {
     padding: 0;
     box-sizing: border-box;
     background-color: #f4f6f9;
+    color: #333; /* لون نص داكن */
 }
 
 /* شريط التنقل */
@@ -72,12 +73,14 @@ body {
     white-space: nowrap;
     overflow: hidden;
     width: 0;
+    color: #34495e; /* لون النص الداكن */
 }
 
 #hero-description {
     font-size: 1.5rem;
     margin-bottom: 30px;
     animation: fadeIn 2s ease-out 1s forwards;
+    color: #2c3e50; /* نص داكن */
 }
 
 .cta-button {
