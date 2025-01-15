@@ -6,7 +6,6 @@ body {
     padding: 0;
     box-sizing: border-box;
     background-color: #f4f6f9;
-    color: #333; /* لون نص داكن */
 }
 
 /* شريط التنقل */
@@ -59,10 +58,12 @@ body {
     text-align: center;
     color: #fff;
     position: relative;
+    overflow: hidden;
 }
 
 .hero-section .hero-content {
     z-index: 1;
+    animation: fadeInUp 1.5s ease-out;
 }
 
 #hero-title {
@@ -73,14 +74,12 @@ body {
     white-space: nowrap;
     overflow: hidden;
     width: 0;
-    color: #34495e; /* لون النص الداكن */
 }
 
 #hero-description {
     font-size: 1.5rem;
     margin-bottom: 30px;
     animation: fadeIn 2s ease-out 1s forwards;
-    color: #2c3e50; /* نص داكن */
 }
 
 .cta-button {
@@ -118,11 +117,23 @@ body {
     }
 }
 
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 /* مميزات الأكاديمية */
 .features {
     padding: 50px 20px;
     background-color: #ecf0f1;
     text-align: center;
+    animation: fadeInUp 1.5s ease-out;
 }
 
 .features .section-title {
@@ -130,12 +141,14 @@ body {
     font-weight: bold;
     margin-bottom: 40px;
     color: #2c3e50;
+    animation: fadeInUp 1.5s ease-out;
 }
 
 .feature-list {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 30px;
+    animation: fadeInUp 1.5s ease-out;
 }
 
 .feature-item {
@@ -144,6 +157,7 @@ body {
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: fadeInUp 1.5s ease-out;
 }
 
 .feature-item:hover {
@@ -170,4 +184,85 @@ footer {
     color: white;
     margin-top: 50px;
     font-size: 1rem;
+    animation: fadeInUp 1.5s ease-out;
+}
+
+/* نمط تسجيل الدخول / التسجيل */
+.form-container {
+    max-width: 500px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    animation: fadeInUp 1.5s ease-out;
+}
+
+.form-container input {
+    width: 100%;
+    padding: 15px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.form-container button {
+    width: 100%;
+    padding: 15px;
+    background-color: #f39c12;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.form-container button:hover {
+    background-color: #e67e22;
+}
+
+/* صفحة لوحة المعلم / الطالب */
+.dashboard {
+    padding: 50px 20px;
+    background-color: #ecf0f1;
+    text-align: center;
+    animation: fadeInUp 1.5s ease-out;
+}
+
+.dashboard .section-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 40px;
+    color: #2c3e50;
+}
+
+.dashboard .dashboard-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.dashboard-item {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dashboard-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.dashboard-item h3 {
+    font-size: 1.8rem;
+    color: #2c3e50;
+    margin-bottom: 15px;
+}
+
+.dashboard-item p {
+    font-size: 1.1rem;
+    color: #7f8c8d;
 }
