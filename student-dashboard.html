@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ar">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة الطالب</title>
+    <link rel="stylesheet" href="../css/student-dashboard.css">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <a href="index.html">الصفحة الرئيسية</a>
+            <ul>
+                <li><a href="student-profile.html">الملف الشخصي</a></li>
+                <li><a href="login.html">تسجيل الخروج</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="student-dashboard">
+        <h2>مرحباً بك في لوحة الطالب</h2>
+        <button id="view-lessons-btn">عرض الدروس</button>
+        <button id="start-quiz-btn">ابدأ الامتحان</button>
+    </section>
+
+    <script src="../js/firebase-config.js"></script>
+    <script src="../js/firebase-auth.js"></script>
+    <script src="../js/student-dashboard.js"></script>
+</body>
+
+</html>

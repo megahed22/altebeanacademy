@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ar">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الدفع والاشتراك</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="teacher-dashboard.html">لوحة المعلم</a></li>
+                <li><a href="student-dashboard.html">لوحة الطالب</a></li>
+                <li><a href="logout.html">تسجيل الخروج</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h2>الاشتراك في الدروس</h2>
+        <p>اختر الدولة ثم قم بالاشتراك في الدروس.</p>
+        <form id="subscription-form">
+            <label for="country">اختر الدولة:</label>
+            <select id="country" required>
+                <option value="qatar">قطر</option>
+                <option value="uae">الإمارات</option>
+                <option value="kuwait">الكويت</option>
+                <option value="saudi">السعودية</option>
+            </select>
+
+            <div id="subscription-plans">
+                <label for="plan">اختر الباقة:</label>
+                <select id="plan" required>
+                    <option value="8sessions">8 حصص بـ 150 ريال</option>
+                    <option value="12sessions">12 حصة بـ 220 ريال</option>
+                    <option value="16sessions">16 حصة بـ 280 ريال</option>
+                </select>
+            </div>
+
+            <button type="submit">إتمام الدفع</button>
+        </form>
+    </main>
+    <script src="payment-subscription.js"></script>
+</body>
+
+</html>

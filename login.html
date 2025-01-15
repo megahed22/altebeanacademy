@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ar">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول</title>
+    <link rel="stylesheet" href="../css/teacher-dashboard.css">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <a href="index.html">الصفحة الرئيسية</a>
+            <ul>
+                <li><a href="teacher-register.html">تسجيل كمعلم</a></li>
+                <li><a href="student-register.html">تسجيل كطالب</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="login-form">
+        <h2>تسجيل الدخول</h2>
+        <form id="login-form">
+            <label for="login-email">البريد الإلكتروني</label>
+            <input type="email" id="login-email" required>
+
+            <label for="login-password">كلمة المرور</label>
+            <input type="password" id="login-password" required>
+
+            <button type="submit">تسجيل الدخول</button>
+        </form>
+    </section>
+
+    <script src="../js/firebase-config.js"></script>
+    <script src="../js/firebase-auth.js"></script>
+    <script src="../js/login.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ar">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بروفايل الطالب</title>
+    <link rel="stylesheet" href="../css/student-dashboard.css">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <a href="student-dashboard.html">اللوحة الرئيسية</a>
+            <ul>
+                <li><a href="login.html">تسجيل الخروج</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="profile">
+        <h2>بروفايل الطالب</h2>
+        <p>الاسم: <span id="student-name">الاسم هنا</span></p>
+        <p>البريد الإلكتروني: <span id="student-email">البريد الإلكتروني هنا</span></p>
+        <button id="update-profile-btn">تحديث الملف الشخصي</button>
+    </section>
+
+    <script src="../js/firebase-config.js"></script>
+    <script src="../js/firebase-auth.js"></script>
+    <script src="../js/student-profile.js"></script>
+</body>
+
+</html>

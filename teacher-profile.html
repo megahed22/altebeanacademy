@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ar">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بروفايل المعلم</title>
+    <link rel="stylesheet" href="../css/teacher-dashboard.css">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <a href="teacher-dashboard.html">اللوحة الرئيسية</a>
+            <ul>
+                <li><a href="login.html">تسجيل الخروج</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="profile">
+        <h2>بروفايل المعلم</h2>
+        <p>الاسم: <span id="teacher-name">الاسم هنا</span></p>
+        <p>البريد الإلكتروني: <span id="teacher-email">البريد الإلكتروني هنا</span></p>
+        <button id="update-profile-btn">تحديث الملف الشخصي</button>
+    </section>
+
+    <script src="../js/firebase-config.js"></script>
+    <script src="../js/firebase-auth.js"></script>
+    <script src="../js/teacher-profile.js"></script>
+</body>
+
+</html>
