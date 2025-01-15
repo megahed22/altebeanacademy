@@ -48,7 +48,7 @@ body {
 
 /* القسم الرئيسي */
 .hero-section {
-    background-image: url('assets/images/hero-background.jpg');
+    background-image: url('../assets/images/hero-background.jpg'); /* تأكد من أن الصورة في المسار الصحيح */
     background-size: cover;
     background-position: center;
     height: 100vh;
