@@ -4,59 +4,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>أكاديمية التبيان</title>
-    <!-- ربط ملف CSS بشكل صحيح -->
-    <link rel="stylesheet" href="../css/main.css">  <!-- تأكد من أن المسار صحيح -->
-    <script defer src="../js/main.js"></script>
+    <title>الصفحة الرئيسية</title>
+    <link rel="stylesheet" href="../css/main.css">
 </head>
 
 <body>
-    <!-- شريط التنقل العلوي -->
     <header>
-        <div class="navbar">
-            <img src="../assets/icons/logo.png" alt="أكاديمية التبيان" class="logo">
-            <nav>
-                <ul>
-                    <li><a href="teacher-register.html">التسجيل كمعلم</a></li>
-                    <li><a href="student-register.html">التسجيل كطالب</a></li>
-                    <li><a href="login.html">تسجيل الدخول</a></li>
-                </ul>
-            </nav>
-        </div>
+        <nav>
+            <a href="index.html">الصفحة الرئيسية</a>
+            <ul>
+                <li><a href="login.html">تسجيل الدخول</a></li>
+                <li><a href="teacher-register.html">تسجيل كمعلم</a></li>
+                <li><a href="student-register.html">تسجيل كطالب</a></li>
+            </ul>
+        </nav>
     </header>
 
-    <!-- القسم الرئيسي مع إعلان -->
-    <section class="hero-section">
-        <div class="hero-content">
-            <h1 id="hero-title">التبيان - مناهج تعليمية لجميع المراحل</h1>
-            <p id="hero-description">ندرس المناهج الأمريكية، البريطانية، الوزارية، وجميع مناهج التأسيس بأسعار رمزية تناسب الجميع. تعلم مع تقنيات حديثة لتطوير مستقبلك.</p>
-            <a href="student-register.html" class="cta-button">سجل الآن</a>
-        </div>
+    <section class="hero">
+        <h1>مرحبًا بك في أكاديمية التعليم</h1>
+        <p>انضم إلينا لتعلم المهارات المختلفة مع معلمين محترفين</p>
+        <a href="login.html" class="cta-button">ابدأ الآن</a>
     </section>
 
-    <!-- مميزات أكاديمية التبيان -->
-    <section class="features">
-        <h2 class="section-title">مميزات أكاديمية التبيان</h2>
-        <div class="feature-list">
-            <div class="feature-item">
-                <h3>تعليم شامل</h3>
-                <p>منهج متكامل لجميع المراحل الدراسية مع معلمين متخصصين.</p>
-            </div>
-            <div class="feature-item">
-                <h3>أسعار مناسبة</h3>
-                <p>تقدم أكاديمية التبيان أسعارًا تنافسية ومناسبة للجميع.</p>
-            </div>
-            <div class="feature-item">
-                <h3>تقنيات حديثة</h3>
-                <p>استخدام تقنيات مبتكرة لتحفيز الطلاب وتحقيق النجاح الأكاديمي.</p>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <p>&copy; 2025 أكاديمية التبيان. جميع الحقوق محفوظة.</p>
-    </footer>
-
+    <script src="../js/firebase-config.js"></script>
+    <script src="../js/main.js"></script>
 </body>
 
 </html>

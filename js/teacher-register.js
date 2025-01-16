@@ -1,21 +1,58 @@
-import { auth } from './firebase-config.js';
+import { auth, db } from './firebase-config.js';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { setDoc, doc } from 'firebase/firestore';
 
-const teacherRegisterForm = document.getElementById('teacher-register-form');
+const registerForm = document.getElementById('teacher-register-form');
+const messageContainer = document.querySelector('.message-container');
 
-teacherRegisterForm.addEventListener('submit', (e) => {
+registerForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
     const name = document.getElementById('name').value;
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
 
-    createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            const user = userCredential.user;
-            console.log('تم التسجيل بنجاح:', user);
-        })
-        .catch((error) => {
-            console.error('حدث خطأ أثناء التسجيل:', error);
-        });
+    // التحقق من البيانات
+    if (name && email && password) {
+        // التسجيل في Firebase
+        createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                const user = userCredential.user;
+                const userRef = doc(db, 'users', user.uid);
+
+                // حفظ بيانات المستخدم في Firestore
+                setDoc(userRef, {
+                    name: name,
+                    email: email,
+                    role: 'teacher', // تحديد الدور كمعلم
+                    createdAt: new Date(),
+                    profilePicture: '', // يمكنك إضافة صورة بعد تحميلها
+                    sessionsCount: 0,
+                    specialization: '',
+                    earnings: 0,
+                }).then(() => {
+                    messageContainer.innerHTML = `
+                        <div class="message success">
+                            تم تسجيلك كمعلم بنجاح! شكراً لاختيارك الأكاديمية.
+                        </div>
+                    `;
+                    setTimeout(() => {
+                        window.location.href = 'login.html'; // إعادة التوجيه إلى صفحة تسجيل الدخول
+                    }, 3000);
+                });
+            })
+            .catch((error) => {
+                messageContainer.innerHTML = `
+                    <div class="message error">
+                        ${error.message}
+                    </div>
+                `;
+            });
+    } else {
+        messageContainer.innerHTML = `
+            <div class="message error">
+                يرجى ملء جميع الحقول.
+            </div>
+        `;
+    }
 });

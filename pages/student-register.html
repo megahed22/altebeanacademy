@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>تسجيل كطالب</title>
-   <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/main.css">
 </head>
 
 <body>
@@ -21,17 +21,18 @@
     <section class="register-form">
         <h2>تسجيل الطالب</h2>
         <form id="student-register-form">
-            <label for="student-name">الاسم</label>
-            <input type="text" id="student-name" required>
+            <label for="name">الاسم</label>
+            <input type="text" id="name" required>
 
-            <label for="student-email">البريد الإلكتروني</label>
-            <input type="email" id="student-email" required>
+            <label for="email">البريد الإلكتروني</label>
+            <input type="email" id="email" required>
 
-            <label for="student-password">كلمة المرور</label>
-            <input type="password" id="student-password" required>
+            <label for="password">كلمة المرور</label>
+            <input type="password" id="password" required>
 
             <button type="submit">تسجيل</button>
         </form>
+        <div class="message-container"></div>
     </section>
 
     <script src="../js/firebase-config.js"></script>

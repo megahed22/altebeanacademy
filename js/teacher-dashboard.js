@@ -1,27 +1,30 @@
-// main.js
-import { loginUser, registerUser } from './firebase-auth.js';
+import { auth, db } from './firebase-config.js';
+import { doc, getDoc } from 'firebase/firestore';
 
-const loginForm = document.getElementById('loginForm');
-const registerForm = document.getElementById('registerForm');
+const teacherDashboard = document.querySelector('.teacher-dashboard');
 
-loginForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const email = loginForm.email.value;
-    const password = loginForm.password.value;
-    loginUser(email, password)
-        .then(() => {
-            window.location.href = '/teacher-dashboard.html'; // الانتقال إلى لوحة المعلم
-        })
-        .catch(error => alert(error.message));
-});
-
-registerForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const email = registerForm.email.value;
-    const password = registerForm.password.value;
-    registerUser(email, password)
-        .then(() => {
-            window.location.href = '/teacher-dashboard.html'; // الانتقال إلى لوحة المعلم
-        })
-        .catch(error => alert(error.message));
+// التحقق من حالة تسجيل الدخول
+auth.onAuthStateChanged((user) => {
+    if (user && user.displayName === 'teacher') {
+        // استرجاع بيانات المعلم من Firestore
+        getDoc(doc(db, 'users', user.uid))
+            .then((docSnap) => {
+                if (docSnap.exists()) {
+                    const teacherData = docSnap.data();
+                    teacherDashboard.innerHTML = `
+            <h2>مرحبًا بك، ${teacherData.name}</h2>
+            <p>التخصص: ${teacherData.specialization || 'غير محدد'}</p>
+            <p>عدد الجلسات: ${teacherData.sessionsCount || 0}</p>
+            <p>الإيرادات: ${teacherData.earnings || 0}</p>
+          `;
+                } else {
+                    console.log('لا توجد بيانات للمعلم');
+                }
+            })
+            .catch((error) => {
+                console.error('حدث خطأ أثناء استرجاع بيانات المعلم:', error);
+            });
+    } else {
+        window.location.href = 'login.html'; // إذا كان المستخدم غير مسجل الدخول أو ليس معلمًا
+    }
 });

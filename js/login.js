@@ -11,10 +11,14 @@ loginForm.addEventListener('submit', (e) => {
 
     signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
+            const user = userCredential.user;
             console.log('تم تسجيل الدخول بنجاح');
-            window.location.href = userCredential.user.displayName === 'teacher' ? 'teacher-dashboard.html' : 'student-dashboard.html';
+
+            // التوجيه بناءً على الدور
+            const role = user.displayName === 'teacher' ? 'teacher-dashboard.html' : 'student-dashboard.html';
+            window.location.href = role;
         })
         .catch((error) => {
-            console.error('حدث خطأ أثناء تسجيل الدخول:', error);
+            console.error('حدث خطأ أثناء تسجيل الدخول:', error.message);
         });
 });
