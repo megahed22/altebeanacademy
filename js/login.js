@@ -13,34 +13,29 @@ loginForm.addEventListener('submit', (e) => {
     signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
             const user = userCredential.user;
-            console.log('تم تسجيل الدخول بنجاح');
 
-            // استرجاع بيانات المستخدم من Firestore للتحقق من الدور
-            const userRef = doc(db, 'users', user.uid);
-            getDoc(userRef)
+            // التحقق من الدور من خلال Firestore
+            getDoc(doc(db, 'users', user.uid))
                 .then((docSnap) => {
                     if (docSnap.exists()) {
                         const userData = docSnap.data();
-                        const role = userData.role; // استخراج الدور من البيانات
+                        const role = userData.role; // الحصول على الدور من Firestore
 
                         // التوجيه بناءً على الدور
                         if (role === 'teacher') {
-                            window.location.href = 'teacher-dashboard.html'; // توجيه المعلم إلى لوحة المعلم
+                            window.location.href = 'teacher-dashboard.html'; // التوجيه إلى لوحة المعلم
                         } else if (role === 'student') {
-                            window.location.href = 'student-dashboard.html'; // توجيه الطالب إلى لوحة الطالب
-                        } else {
-                            console.log('دور غير معروف');
+                            window.location.href = 'student-dashboard.html'; // التوجيه إلى لوحة الطالب
                         }
                     } else {
-                        console.log('لا توجد بيانات للمستخدم');
+                        console.error('لم يتم العثور على بيانات المستخدم في Firestore');
                     }
                 })
                 .catch((error) => {
-                    console.error('حدث خطأ أثناء استرجاع بيانات المستخدم:', error.message);
+                    console.error('حدث خطأ أثناء استرجاع بيانات الدور:', error);
                 });
         })
         .catch((error) => {
             console.error('حدث خطأ أثناء تسجيل الدخول:', error.message);
-            alert('البريد الإلكتروني أو كلمة المرور غير صحيحة');
         });
 });

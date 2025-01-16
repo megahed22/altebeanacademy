@@ -30,3 +30,4 @@ form.addEventListener('submit', async (e) => {
         console.error('حدث خطأ أثناء التسجيل:', error.message);
     }
 });
+

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>لوحة المعلم</title>
+    <title>لوحة تحكم المعلم</title>
     <link rel="stylesheet" href="../css/main.css">
 </head>
 
@@ -13,16 +13,19 @@
         <nav>
             <a href="index.html">الصفحة الرئيسية</a>
             <ul>
-                <li><a href="logout.html">تسجيل الخروج</a></li>
+                <li><a href="login.html" id="logout-btn">تسجيل الخروج</a></li>
             </ul>
         </nav>
     </header>
 
     <section class="teacher-dashboard">
-        <h2>مرحبًا بك، معلمنا الكريم</h2>
-        <p>عدد الجلسات: 50</p>
-        <p>التخصص: حفظ القرآن</p>
-        <p>الإيرادات: 80</p>
+        <h2>مرحبًا بك في لوحة المعلم</h2>
+        <div class="teacher-info">
+            <p id="teacher-name">الاسم: <span></span></p>
+            <p id="teacher-specialization">التخصص: <span></span></p>
+            <p id="teacher-sessions-count">عدد الجلسات: <span></span></p>
+            <p id="teacher-earnings">الإيرادات: <span></span></p>
+        </div>
     </section>
 
     <script src="../js/firebase-config.js"></script>

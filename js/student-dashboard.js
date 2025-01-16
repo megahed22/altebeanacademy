@@ -5,26 +5,34 @@ const studentDashboard = document.querySelector('.student-dashboard');
 
 // التحقق من حالة تسجيل الدخول
 auth.onAuthStateChanged((user) => {
-    if (user && user.displayName === 'student') {
-        // استرجاع بيانات الطالب من Firestore
+    if (user) {
+        // استرجاع بيانات المستخدم من Firestore للتحقق من الدور
         getDoc(doc(db, 'users', user.uid))
             .then((docSnap) => {
                 if (docSnap.exists()) {
-                    const studentData = docSnap.data();
-                    studentDashboard.innerHTML = `
-            <h2>مرحبًا بك، ${studentData.name}</h2>
-            <p>عدد الجلسات: ${studentData.sessionsCount || 0}</p>
-            <p>التخصص: ${studentData.specialization || 'غير محدد'}</p>
-            <p>الإيرادات: ${studentData.earnings || 0}</p>
-          `;
+                    const userData = docSnap.data();
+                    const role = userData.role; // استرجاع الدور من البيانات
+
+                    if (role === 'student') {
+                        // استعراض بيانات الطالب
+                        studentDashboard.innerHTML = `
+                            <h2>مرحبًا بك، ${userData.name}</h2>
+                            <p>الصف الدراسي: ${userData.grade || 'غير محدد'}</p>
+                            <p>العدد الإجمالي للجلسات: ${userData.sessionsCount || 0}</p>
+                        `;
+                    } else {
+                        // في حال كان المستخدم ليس طالبًا
+                        window.location.href = 'login.html'; // توجيه إلى صفحة تسجيل الدخول
+                    }
                 } else {
-                    console.log('لا توجد بيانات للطالب');
+                    console.log('لا توجد بيانات للمستخدم');
                 }
             })
             .catch((error) => {
                 console.error('حدث خطأ أثناء استرجاع بيانات الطالب:', error);
             });
     } else {
-        window.location.href = 'login.html'; // إذا كان المستخدم غير مسجل الدخول أو ليس طالبًا
+        // إذا لم يكن المستخدم مسجل الدخول
+        window.location.href = 'login.html'; // توجيه إلى صفحة تسجيل الدخول
     }
 });
