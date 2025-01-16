@@ -1,58 +1,32 @@
 import { auth, db } from './firebase-config.js';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { setDoc, doc } from 'firebase/firestore';
+import { doc, setDoc } from 'firebase/firestore';
 
-const registerForm = document.getElementById('teacher-register-form');
-const messageContainer = document.querySelector('.message-container');
-
-registerForm.addEventListener('submit', (e) => {
+const form = document.getElementById('teacher-register-form');
+form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const name = document.getElementById('name').value;
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
+    const name = document.getElementById('name').value;
 
-    // التحقق من البيانات
-    if (name && email && password) {
-        // التسجيل في Firebase
-        createUserWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                const user = userCredential.user;
-                const userRef = doc(db, 'users', user.uid);
+    try {
+        // تسجيل المستخدم في Firebase Auth
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
 
-                // حفظ بيانات المستخدم في Firestore
-                setDoc(userRef, {
-                    name: name,
-                    email: email,
-                    role: 'teacher', // تحديد الدور كمعلم
-                    createdAt: new Date(),
-                    profilePicture: '', // يمكنك إضافة صورة بعد تحميلها
-                    sessionsCount: 0,
-                    specialization: '',
-                    earnings: 0,
-                }).then(() => {
-                    messageContainer.innerHTML = `
-                        <div class="message success">
-                            تم تسجيلك كمعلم بنجاح! شكراً لاختيارك الأكاديمية.
-                        </div>
-                    `;
-                    setTimeout(() => {
-                        window.location.href = 'login.html'; // إعادة التوجيه إلى صفحة تسجيل الدخول
-                    }, 3000);
-                });
-            })
-            .catch((error) => {
-                messageContainer.innerHTML = `
-                    <div class="message error">
-                        ${error.message}
-                    </div>
-                `;
-            });
-    } else {
-        messageContainer.innerHTML = `
-            <div class="message error">
-                يرجى ملء جميع الحقول.
-            </div>
-        `;
+        // تخزين بيانات المستخدم في Firestore مع إضافة role كـ "teacher"
+        await setDoc(doc(db, 'users', user.uid), {
+            name: name,
+            email: email,
+            role: 'teacher', // تحديد الدور هنا
+            createdAt: new Date()
+        });
+
+        console.log('تم تسجيل المعلم بنجاح');
+        alert('تم تسجيلك بنجاح كمعلم');
+        window.location.href = 'teacher-dashboard.html'; // التوجيه إلى لوحة المعلم
+    } catch (error) {
+        console.error('حدث خطأ أثناء التسجيل:', error.message);
     }
 });
