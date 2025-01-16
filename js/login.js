@@ -1,41 +1,39 @@
-import { auth, db } from './firebase-config.js';
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import { doc, getDoc } from 'firebase/firestore';
+iimport { auth } from "./firebase.js";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { getFirestore, doc, getDoc } from "firebase/firestore";
 
-const loginForm = document.getElementById('login-form');
+// إعداد Firestore
+const db = getFirestore();
 
-loginForm.addEventListener('submit', (e) => {
+document.getElementById("loginForm").addEventListener("submit", async (e) => {
     e.preventDefault();
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
 
-    const email = document.getElementById('login-email').value;
-    const password = document.getElementById('login-password').value;
+    try {
+        // تسجيل الدخول
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
 
-    signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            const user = userCredential.user;
+        // استرداد معلومات الدور من Firestore
+        const userDoc = doc(db, "users", user.uid); // "users" هو اسم المجموعة في Firestore
+        const userSnapshot = await getDoc(userDoc);
 
-            // التحقق من الدور من خلال Firestore
-            getDoc(doc(db, 'users', user.uid))
-                .then((docSnap) => {
-                    if (docSnap.exists()) {
-                        const userData = docSnap.data();
-                        const role = userData.role; // الحصول على الدور من Firestore
+        if (userSnapshot.exists()) {
+            const userData = userSnapshot.data();
 
-                        // التوجيه بناءً على الدور
-                        if (role === 'teacher') {
-                            window.location.href = 'teacher-dashboard.html'; // التوجيه إلى لوحة المعلم
-                        } else if (role === 'student') {
-                            window.location.href = 'student-dashboard.html'; // التوجيه إلى لوحة الطالب
-                        }
-                    } else {
-                        console.error('لم يتم العثور على بيانات المستخدم في Firestore');
-                    }
-                })
-                .catch((error) => {
-                    console.error('حدث خطأ أثناء استرجاع بيانات الدور:', error);
-                });
-        })
-        .catch((error) => {
-            console.error('حدث خطأ أثناء تسجيل الدخول:', error.message);
-        });
+            // تحقق من الدور
+            if (userData.role === "teacher") {
+                window.location.href = "teacher-dashboard.html";
+            } else if (userData.role === "student") {
+                window.location.href = "student-dashboard.html";
+            } else {
+                console.error("Role not recognized.");
+            }
+        } else {
+            console.error("User role not found in database.");
+        }
+    } catch (error) {
+        console.error("Error logging in:", error.message);
+    }
 });
